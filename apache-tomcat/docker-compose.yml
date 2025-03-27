@@ -1,0 +1,17 @@
+version: '3'
+services:
+  tomcat:
+    image: tomcat:9.0-jdk11-openjdk  # Usa una versión que tenga el Manager por defecto
+    container_name: apache-tomcat
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./webapps:/usr/local/tomcat/webapps
+      - ./tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml
+      - ./context.xml:/usr/local/tomcat/conf/context.xml
+    networks:
+      - tomcat-network
+
+networks:
+  tomcat-network:
+    driver: bridge
